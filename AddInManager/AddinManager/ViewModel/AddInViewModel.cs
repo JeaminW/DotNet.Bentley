@@ -52,6 +52,8 @@ namespace AddinManager.ViewModel
 
         public AddinManager.MVVM.RelayCommand Remove { get; private set; }
 
+        public AddinManager.MVVM.RelayCommand Reload { get; private set; }
+
         public AddInViewModel()
         {
             this.Models = new ObservableCollection<AddInModel>();
@@ -59,6 +61,7 @@ namespace AddinManager.ViewModel
             this.Run = new AddinManager.MVVM.RelayCommand(OnRun, () => SelectedModel != null && SelectedModel.Childs.Count == 0);
             this.Load = new AddinManager.MVVM.RelayCommand(OnLoad);
             this.Remove = new AddinManager.MVVM.RelayCommand(OnRemove, () => SelectedModel != null && SelectedModel.Childs.Count > 0);
+            this.Reload = new AddinManager.MVVM.RelayCommand(OnReload, () => SelectedModel != null && SelectedModel.Parent == null);
         }
 
         private void OnRemove()
@@ -66,6 +69,16 @@ namespace AddinManager.ViewModel
             if (SelectedModel.Parent == null)
             {
                 Models.Remove(SelectedModel);
+            }
+        }
+
+        private void OnReload()
+        {
+            if (SelectedModel.Parent == null)
+            {
+                var path = SelectedModel.Path;
+                Models.Remove(SelectedModel);
+                loadModel(path);
             }
         }
 
@@ -80,52 +93,7 @@ namespace AddinManager.ViewModel
             {
                 var file = openFileDialog.FileName;
 
-                var assemblyResolveHelper = default(AssemblyResolveHelper);
-
-                try
-                {
-                    assemblyResolveHelper = new AssemblyResolveHelper();
-
-                    var assembly = assemblyResolveHelper.Registered(file);
-
-                    if (assembly == null)
-                    {
-                        System.Windows.MessageBox.Show("Assembly is resolve fail , please check if the dependencies are missing !");
-                        return;
-                    }
-
-                    var types = assembly.GetTypes().Where(x => x.GetAttribue<AddInAttribute>() != null && x.GetInterface(typeof(ICommand).FullName) != null).ToList();
-
-                    if (types.Count == 0)
-                    {
-                        return;
-                    }
-
-                    var addin = Models.FirstOrDefault(x => x.Name == assembly.GetName().Name);
-
-                    if (addin != null)
-                    {
-                        Models.Remove(addin);
-                    }
-
-                    var model = new AddInModel() { Name = assembly.GetName().Name, Path = file };
-
-                    foreach (var item in types)
-                    {
-                        model.Childs.Add(new AddInModel()
-                        {
-                            Name = item.FullName,
-                            Path = file,
-                            Parent = model
-                        });
-                    }
-
-                    Models.Add(model);
-                }
-                finally
-                {
-                    assemblyResolveHelper?.UnRegistered();
-                }
+                loadModel(file);
             }
         }
 
@@ -180,6 +148,59 @@ namespace AddinManager.ViewModel
             catch(Exception ex)
             {
                 System.Windows.MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                assemblyResolveHelper?.UnRegistered();
+            }
+        }
+
+        private void loadModel(string path)
+        {
+            if (string.IsNullOrEmpty(path))
+                return;
+
+            var assemblyResolveHelper = default(AssemblyResolveHelper);
+
+            try
+            {
+                assemblyResolveHelper = new AssemblyResolveHelper();
+
+                var assembly = assemblyResolveHelper.Registered(path);
+
+                if (assembly == null)
+                {
+                    System.Windows.MessageBox.Show("Assembly is resolve fail , please check if the dependencies are missing !");
+                    return;
+                }
+
+                var types = assembly.GetTypes().Where(x => x.GetAttribue<AddInAttribute>() != null && x.GetInterface(typeof(ICommand).FullName) != null).ToList();
+
+                if (types.Count == 0)
+                {
+                    return;
+                }
+
+                var addin = Models.FirstOrDefault(x => x.Name == assembly.GetName().Name);
+
+                if (addin != null)
+                {
+                    Models.Remove(addin);
+                }
+
+                var model = new AddInModel() { Name = assembly.GetName().Name, Path = path };
+
+                foreach (var item in types)
+                {
+                    model.Childs.Add(new AddInModel()
+                    {
+                        Name = item.FullName,
+                        Path = path,
+                        Parent = model
+                    });
+                }
+
+                Models.Add(model);
             }
             finally
             {

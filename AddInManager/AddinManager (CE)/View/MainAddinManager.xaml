@@ -32,10 +32,13 @@
                 </i:Interaction.Behaviors>
             </TreeView>
         </GroupBox>
-        <Button Grid.Row="1" Command="{Binding Remove}" HorizontalAlignment="Left" Width="100" Height="32" VerticalAlignment="Center" Margin="2,0,0,0" Content="Remove"></Button>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Button Command="{Binding Remove}" Margin="2,0,0,0" Width="60" Height="32" Content="Remove"></Button>
+            <Button Command="{Binding Reload}" Margin="2,0,0,0" Width="60" Height="32" Content="Reload"></Button>
+        </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center">
-            <Button Command="{Binding Load}" Margin="0,0,2,0" Width="100" Height="32" Content="Load"></Button>
-            <Button Command="{Binding Run}" Margin="0,0,2,0" Width="100" Height="32" Content="Run"></Button>
+            <Button Command="{Binding Load}" Margin="0,0,2,0" Width="60" Height="32" Content="Load"></Button>
+            <Button Command="{Binding Run}" Margin="0,0,2,0" Width="60" Height="32" Content="Run"></Button>
         </StackPanel>
     </Grid>
 </Window>
