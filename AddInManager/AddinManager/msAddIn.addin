@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MSAddIn>
+  <Name>Demo</Name>
+  <AddInId>4B45E5FE-69B8-4ABB-88B9-5E2A096B0D62</AddInId>
+  <Assembly></Assembly>
+  <Description>This microstation addin file demo .</Description>
+</MSAddIn>

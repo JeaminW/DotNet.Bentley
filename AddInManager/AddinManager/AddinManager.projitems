@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>6ef47a74-cb96-438b-8b85-b328ff090a4f</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>AddinManager</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\AssemblyResolveHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\GlobalHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\ReflectionHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\AddInAssemblyModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\AddInFileModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\AddInModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MVVM\IExecuteWithObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MVVM\IMessenger.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MVVM\Messenger.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MVVM\ObservableObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MVVM\RelayCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MVVM\RelayCommandGeneric.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MVVM\SelectedItemBehavior.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MVVM\WeakAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MVVM\WeakActionGeneric.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\AddInViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)msAddIn.addin" />
+  </ItemGroup>
+</Project>
