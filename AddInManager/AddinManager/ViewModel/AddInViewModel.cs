@@ -8,6 +8,7 @@ using System.Reflection;
 using Microsoft.Win32;
 using System.IO;
 using AddinManager.Model;
+using Bentley.DgnPlatformNET;
 using Bentley.MstnPlatformNET;
 
 namespace AddinManager.ViewModel
@@ -99,9 +100,17 @@ namespace AddinManager.ViewModel
 
         private void OnRun()
         {
+            const String CFG_ADDIN_DEPS_PATH = "MS_ADDIN_DEPENDENCYPATH";
+            
             var file = SelectedModel.Path;
-
+            var cfgAddinDepsPath = ConfigurationManager.GetVariable(CFG_ADDIN_DEPS_PATH, ConfigurationVariableLevel.User);
             var assemblyResolveHelper = default(AssemblyResolveHelper);
+
+            var libDepsPath = Path.GetDirectoryName(file);
+            if (!cfgAddinDepsPath.Contains(libDepsPath))
+            {
+                ConfigurationManager.DefineVariable(CFG_ADDIN_DEPS_PATH, $"{cfgAddinDepsPath};{libDepsPath}", ConfigurationVariableLevel.User);
+            }
 
             try
             {
