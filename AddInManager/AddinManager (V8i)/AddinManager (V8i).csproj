@@ -48,12 +48,16 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Bentley.General.1.0">
-      <HintPath>D:\Program Files (x86)\Bentley\MicroStation V8i (SELECTseries)\MicroStation\mdlapps\Bentley.General.1.0.dll</HintPath>
+    <Reference Include="Bentley.DgnPlatformNET">
+      <HintPath>$(MS)Bentley.DgnPlatformNET.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="bentley.microstation.interfaces.1.0">
-      <HintPath>D:\Program Files (x86)\Bentley\MicroStation V8i (SELECTseries)\MicroStation\mdlapps\bentley.microstation.interfaces.1.0.dll</HintPath>
+    <Reference Include="Bentley.General.1.0">
+      <HintPath>$(MS)Assemblies\ECFramework\Bentley.General.1.0.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Bentley.MicroStation.Interfaces.1.0">
+      <HintPath>$(MS)Assemblies\Bentley.MicroStation.Interfaces.1.0.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore" />
@@ -71,7 +75,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="ustation">
-      <HintPath>D:\Program Files (x86)\Bentley\MicroStation V8i (SELECTseries)\MicroStation\mdlapps\ustation.dll</HintPath>
+      <HintPath>$(MS)ustation.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="WindowsBase" />

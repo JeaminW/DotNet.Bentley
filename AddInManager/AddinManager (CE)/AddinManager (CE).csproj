@@ -50,20 +50,24 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Bentley.DgnPlatformNET">
+      <HintPath>$(MS)Bentley.DgnPlatformNET.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Bentley.General.1.0">
-      <HintPath>$(MSCEPath)\Assemblies\ECFramework\Bentley.General.1.0.dll</HintPath>
+      <HintPath>$(MS)Assemblies\ECFramework\Bentley.General.1.0.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Bentley.MicroStation">
-      <HintPath>$(MSCEPath)\Assemblies\Bentley.MicroStation.dll</HintPath>
+      <HintPath>$(MS)Assemblies\Bentley.MicroStation.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Bentley.MicroStation.Interfaces.1.0">
-      <HintPath>$(MSCEPath)\Assemblies\Bentley.MicroStation.Interfaces.1.0.dll</HintPath>
+      <HintPath>$(MS)Assemblies\Bentley.MicroStation.Interfaces.1.0.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Bentley.MicroStation.WPF">
-      <HintPath>$(MSCEPath)\Assemblies\Bentley.MicroStation.WPF.dll</HintPath>
+      <HintPath>$(MS)Assemblies\Bentley.MicroStation.WPF.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -85,7 +89,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="ustation">
-      <HintPath>$(MSCEPath)\ustation.dll</HintPath>
+      <HintPath>$(MS)ustation.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="WindowsBase" />
